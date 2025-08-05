@@ -1,0 +1,48 @@
+
+/* S'assurer que le formulaire est centré et lisible */
+.add-form-container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 24px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.add-form-container h1 {
+    text-align: center;
+}
+.add-form-container label {
+    display: block;
+    margin-top: 16px;
+}
+.add-form-container input,
+.add-form-container textarea,
+.add-form-container select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.add-form-container button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.add-form-container .back-link {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+}
+
+.confirmation {
+    color: green;
+    text-align: center;
+    margin-top: 20px;
+}

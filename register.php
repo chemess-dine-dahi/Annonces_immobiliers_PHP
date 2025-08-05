@@ -1,14 +1,26 @@
 <?php 
-session_start();
 $errors = [];
-if(empty($_POST['email'])){
-    $errors[]= "L'email est obligatoire";
-}
+if($_SERVER['REQUEST_METHOD']==='POST'){
+    $email= trim($_POST['email']);
+    $password = $_POST['password'];
+    $ConfirmedPassword= $_POST['Confirmedpassword'];
+    if(empty($email)){
+        $errors[]= "L'email est obligatoire";
+    }
 
-if(empty($_POST['password'])){
-    $errors[]= "Le mot de passe est obligatoire";
-}
+    if(empty($password)){
+        $errors[]= "Le mot de passe est obligatoire";
+    }
 
+    if($ConfirmedPassword !== $password){
+        $errors[] = 'Les deux mots de passe ne sont pas similaires';
+    }
+    if (empty($errors)){
+        header("Location: login.php");
+        exit();
+    }
+    
+}
 ?>
 
 
@@ -39,8 +51,11 @@ if(empty($_POST['password'])){
 <body>
 <div class="login-container">
     <h2>Login</h2>
-    <?php if (!empty($error)): ?>
+    <?php if (isset($errors) && !empty($errors)): ?>
+        <?php foreach($errors as $error) : ?>
+        
         <div class="error"><?= htmlspecialchars($error) ?></div>
+        <?php endforeach; ?>
     <?php endif; ?>
     <form method="post" action="">
         <label for="email">Email</label>
@@ -49,7 +64,7 @@ if(empty($_POST['password'])){
         <label for="password">Mot de passe</label>
         <input type="password" id="password" name="password" required>
         <label for="password">Confirmer mot de passe</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="Confirmedpassword" required>
         <input type="submit" value="S'inscrire">
     </form>
     <p>
