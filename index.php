@@ -12,7 +12,7 @@
     <nav>
         <div class="logo">Find My Dream Home</div>
         <ul>
-            <li><a href="#">Login</a></li>
+            <li><a href="login.php">Login</a></li>
             <li><a href="#">House</a></li>
             <li><a href="#">Appartement</a></li>
         </ul>
