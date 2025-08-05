@@ -1,0 +1,55 @@
+html, body {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #a0a0a1;
+    color: white;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1
+}
+
+nav .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+
+/*.annoncesMaison, .annoncesAppar{
+    display: flex;
+    flex-direction: row;
+
+}*/
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #999797;
+    color: white;
+    margin-top: 50px;
+}
