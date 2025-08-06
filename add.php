@@ -34,11 +34,18 @@ function validateForm($data) {
         }
         ?>
         <form name="addForm" action="add.php" method="post" onsubmit="return validateForm();">
-            <label for="image">Image (URL) :</label>
-            <input type="text" id="image" name="image" required>
-
             <label for="titre">Titre :</label>
             <input type="text" id="titre" name="titre" required>
+
+            <label for="type">Property type :</label>
+            <select id="type" name="type" required>
+                <option value="">--Choisir--</option>
+                <option value="House">House</option>
+                <option value="Apartment">Apartment</option>
+            </select>
+
+            <label for="image">Image :</label>
+            <input type="file" id="image" name="image" accept="image/png, image/jpeg" required>
 
             <label for="prix">Prix :</label>
             <input type="number" id="prix" name="prix" min="0" required>

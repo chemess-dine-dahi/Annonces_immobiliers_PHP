@@ -11,7 +11,7 @@ $maisons = [
         'type' => 'Sale'
     ],
     [
-        'image' => 'img/img1.jpg',
+        'image' => 'img/img3.jpg',
         'titre' => 'Maison familiale',
         'prix' => '1,200 €/mois',
         'ville' => 'Lyon',
@@ -19,7 +19,7 @@ $maisons = [
         'type' => 'Rent'
     ],
     [
-        'image' => 'img/img1.jpg',
+        'image' => 'img/img4.jpg',
         'titre' => 'Maison de campagne',
         'prix' => '320,000 €',
         'ville' => 'Dijon',
@@ -31,7 +31,7 @@ $maisons = [
 // Tableau des appartements
 $appartements = [
     [
-        'image' => 'img/img1.jpg',
+        'image' => 'img/img6.jpg',
         'titre' => 'Studio centre-ville',
         'prix' => '800 €/mois',
         'ville' => 'Paris',

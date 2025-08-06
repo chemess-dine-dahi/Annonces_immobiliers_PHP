@@ -5,9 +5,12 @@ html, body {
 }
 
 .container{
-    width: 50%;
+    width: 80%;
     margin: auto;
     background-color: #ecf0f1;
+    display:flex;
+    flex-direction: column; 
+    
 }
 nav {
     position: fixed;
@@ -45,16 +48,24 @@ nav ul li a {
 
 .annoncesMaison, .annoncesAppar{
     display: flex;
-    justify-content: center;
-    align-items: space-between;
-    flex-direction: row;
-
+    gap:18px;
+    
 }
-
+.annonce{
+    border:1px solid #ccc;
+    border-radius: 5px;
+}
 
 img {
-    width: 40%; 
+    width: 100%; 
 }
+
+p, h3, .btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /* Footer */
 footer {
     text-align: center;

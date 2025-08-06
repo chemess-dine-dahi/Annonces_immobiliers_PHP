@@ -37,13 +37,13 @@
         <h2>Nos annonces d’appartements</h2>
         <div class="annoncesAppar">
              <?php foreach ($appartements as $appartement): ?>
-                <div classe="annonce">
+                <div class="annonce">
                     <img class="image" src="<?= $appartement['image'] ?>" alt="Appartement">
                     <h3> <?= $appartement['titre'] ?> </h3>
                     <p><strong> Prix :</strong> <?= $appartement['prix'] ?></p>
                     <p><strong> Ville :</strong> <?= $appartement['ville'] ?></p>
                     <p><strong> Type :</strong> <?= $appartement['type'] ?></p>
-                    <a href="#" classe="btn">Contact</a>
+                    <a href="#" class="btn">Contact</a>
                 </div>
             <?php endforeach ?> 
         </div>
