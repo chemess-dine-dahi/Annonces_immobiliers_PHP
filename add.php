@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Ajouter une annonce</title>
-    <link rel="stylesheet" href="/styles/stylAdd.css">
 <?php
+session_start();
 function validateForm($data) {
     $required = ['image', 'titre', 'prix', 'ville', 'description', 'type'];
     foreach ($required as $field) {
@@ -16,6 +11,12 @@ function validateForm($data) {
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter une annonce</title>
+    <link rel="stylesheet" href="/styles/stylAdd.css">
 </head>
 <body>
     <div class="add-form-container">
