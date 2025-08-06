@@ -57,15 +57,18 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         <div class="error"><?= htmlspecialchars($error) ?></div>
         <?php endforeach; ?>
     <?php endif; ?>
-    <form method="post" action="">
+    <form id="registerForm" method="post" action="">
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required>
+        <span class="error" id="emailError"></span>
 
         <label for="password">Mot de passe</label>
         <input type="password" id="password" name="password" required>
+        <span class="error" id="passwordError"></span>
         <label for="password">Confirmer mot de passe</label>
-        <input type="password" id="password" name="Confirmedpassword" required>
-        <input type="submit" value="S'inscrire">
+        <input type="password" id="confirmPassword" name="Confirmedpassword" required>
+        <div class="error" id="confirmPasswordError"></div>
+        <input type="submit" id="submit" value="S'inscrire">
     </form>
     <p>
         Déjà inscrit ? <a href="login.php">Connectez-vous</a>
@@ -73,3 +76,52 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 </div>
 </body>
 </html>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('registerForm');
+    let isSubmitted = false;
+    form.addEventListener('submit', function (e) {
+        
+        let isValid = true;
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const button = document.querySelector('button');
+
+        document.querySelectorAll('.error').forEach(el => el.textContent = '');
+        document.querySelectorAll('input').forEach(el => el.classList.remove('invalid'));
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value)) {
+            isValid = false;
+            email.classList.add('invalid');
+            document.getElementById('emailError').textContent = 'Veuillez entrer une adresse email valide.';
+        }
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+        if (!passwordRegex.test(password.value)) {
+            isValid = false;
+            password.classList.add('invalid');
+            document.getElementById('passwordError').textContent = 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.';
+        }
+
+        if (password.value !== confirmPassword.value || confirmPassword.value === '') {
+            isValid = false;
+            confirmPassword.classList.add('invalid');
+            document.getElementById('confirmPasswordError').textContent = 'Les mots de passe ne correspondent pas.';
+        }
+
+        if (isValid && !isSubmitted) {
+            alert('Formulaire validé avec succès !');
+            button.disabled = true;
+            isSubmitted = true;
+            form.submit();
+        }
+        else{
+            e.preventDefault();
+        }
+    });
+});
+</script>
