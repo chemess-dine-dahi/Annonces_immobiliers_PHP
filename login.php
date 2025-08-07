@@ -1,6 +1,8 @@
 <?php 
-session_start();
-
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+require_once 'bdd.php';
 $errors = [];
 
 if($_SERVER['REQUEST_METHOD']==='POST'){
@@ -13,6 +15,28 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 
     if(empty($password)){
         $errors[]= "Le mot de passe est obligatoire";
+    }
+
+    if (empty($errors)) {
+        $stmt = $pdo->prepare("SELECT * FROM user WHERE email = :email AND password = :password");
+        $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+        $stmt->bindValue(':password', $password, PDO::PARAM_STR); // pas de hash ici
+
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        // Connexion réussie
+        $_SESSION['user'] = [
+            'id' => $user['id'],
+            'email' => $user['email'],
+            'role' => $user['role']
+        ];
+        header('Location: index.php'); // Redirige vers l’accueil
+        exit;
+    } else {
+        $errors[] = "Email ou mot de passe incorrect";
+    }
     }
 }
 
@@ -46,8 +70,10 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 <body>
 <div class="login-container">
     <h2>Login</h2>
-    <?php if (!empty($error)): ?>
-        <div class="error"><?= htmlspecialchars($error) ?></div>
+    <?php if (!empty($errors)): ?>
+        <?php foreach ($errors as $err): ?>
+            <div class="error"><?= htmlspecialchars($err) ?></div>
+        <?php endforeach; ?>
     <?php endif; ?>
     <form method="post" action="">
         <label for="email">Email</label>
@@ -66,8 +92,4 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 </html>
 
 
-
-<?php
-require_once 'bdd.php';
-?>
 

@@ -1,3 +1,4 @@
+drop database if exists dreamhome;
 Create database DreamHome;
 use dreamhome;
 
@@ -29,6 +30,7 @@ updated_at datetime not null,
 CONSTRAINT unique_name UNIQUE (name) 
 );
 
+drop table if exists listing;
 create table if not exists listing(
 id int primary key auto_increment,
 title varchar(255) not null,
@@ -51,14 +53,27 @@ values('user1@gmail.com', 'Azerty?1234', now(), now());
 
 
 insert into propertyType(name, created_at, updated_at) values
-('house', now(), now()),('appartment', now(), now());
-select * from propertyType;
+('house', now(), now()),
+('appartment', now(), now());
+
 
 insert into transactionType(name, created_at, updated_at) values
-('rent', now(), now()),('sale', now(), now());
-select * from transactionType;
+('rent', now(), now()),
+('sale', now(), now());
 
 
-insert into listing (title,description,price,city,property_type_id,transaction_type_id, user_id,created_at, updated_at) values
-('Apparetement T2', 'Au bord de mer', 200000,'Nice',2, 1,1, now(),now()); 
-select * from listing;
+
+insert into listing (title,description,price,city, image_url, property_type_id,transaction_type_id, user_id,created_at, updated_at) values
+('Appartement T2', 'Studio centre-ville', 1000,'Nice', 'img/img5.jpg',2, 1,1, now(),now()); 
+insert into listing (title,description,price,city, image_url, property_type_id,transaction_type_id, user_id,created_at, updated_at) values
+('Villa', 'Villa au bord de mer', 450000,'Nice', 'img/img1.jpg',1, 2,1, now(),now()); 
+
+
+SELECT l.*, pt.name AS property_type, tt.name AS transaction_type
+FROM listing l
+JOIN propertyType pt ON l.property_type_id = pt.id
+JOIN transactionType tt ON l.transaction_type_id = tt.id
+WHERE pt.name = 'Appartment';
+
+
+ALTER TABLE user ADD COLUMN role ENUM('user', 'agent', 'admin') DEFAULT 'user';
