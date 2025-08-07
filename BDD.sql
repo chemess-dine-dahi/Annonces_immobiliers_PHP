@@ -77,3 +77,16 @@ WHERE pt.name = 'Appartment';
 
 
 ALTER TABLE user ADD COLUMN role ENUM('user', 'agent', 'admin') DEFAULT 'user';
+insert into user(email,password, created_at, updated_at,role) 
+values('agent1@gmail.com', 'Agent?1234', now(), now(), 'agent');
+insert into user(email,password, created_at, updated_at,role) 
+values('admin1@gmail.com', 'Admin?1234', now(), now(), 'admin');
+
+CREATE TABLE favorite (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    listing_id INT NOT NULL,
+    UNIQUE(user_id, listing_id),
+    FOREIGN KEY (user_id) REFERENCES user(id),
+    FOREIGN KEY (listing_id) REFERENCES listing(id)
+);

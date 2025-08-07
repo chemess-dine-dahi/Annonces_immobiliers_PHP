@@ -36,6 +36,36 @@ require_once 'bdd.php';
                     <p><?= htmlspecialchars(substr($row['description'], 0, 100)) ?>...</p>
                     <p><strong> Type :</strong> <?= $row['transaction_type'] ?></p>
                     <a href="#" class="btn">Contact</a>
+
+                    <!-- Ajouter le button supp/Add favorite --> 
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <?php
+                        // Vérifier si cette annonce est déjà en favoris pour l'utilisateur
+                        $stmtFav = $pdo->prepare("SELECT COUNT(*) FROM favorite WHERE user_id = :user_id AND listing_id = :listing_id");
+                        $stmtFav->execute(['user_id' => $_SESSION['user']['id'], 'listing_id' => $row['id']]);
+                        $isFavorite = $stmtFav->fetchColumn() > 0;
+                        ?>
+
+                        <?php if (!$isFavorite): ?>
+                            <form method="post" action="add_favorite.php" style="display:inline;">
+                                <input type="hidden" name="listing_id" value="<?= $row['id'] ?>">
+                                <button type="submit">Ajouter aux favoris</button>
+                            </form>
+                        <?php else: ?>
+                            <form method="post" action="remove_favorite.php" style="display:inline;">
+                                <input type="hidden" name="listing_id" value="<?= $row['id'] ?>">
+                                <button type="submit">Retirer des favoris</button>
+                            </form>
+                        <?php endif; ?>
+                    <?php endif; ?>
+
+                    <br> 
+                    <?php if (isset($_SESSION['user']) && 
+                    ($_SESSION['user']['id'] === $row['user_id'] || $_SESSION['user']['role'] === 'admin')): ?>
+                    <a href="edit.php?id=<?= $row['id'] ?>">Modifier</a>
+                    <br> 
+                    <a href="delete.php?id=<?= $row['id'] ?>">Supprimer</a>
+                    <?php endif; ?>
                 </div>
             <?php endwhile ?>
         </div>
@@ -62,6 +92,36 @@ require_once 'bdd.php';
                     <p><?= htmlspecialchars(substr($row['description'], 0, 100)) ?>...</p>
                     <p><strong> Type :</strong> <?= $row['transaction_type'] ?></p>
                     <a href="#" class="btn">Contact</a>
+
+                    <!-- Ajouter le button supp/Add favorite --> 
+                    <?php if (isset($_SESSION['user'])): ?>
+                        <?php
+                        // Vérifier si cette annonce est déjà en favoris pour l'utilisateur
+                        $stmtFav = $pdo->prepare("SELECT COUNT(*) FROM favorite WHERE user_id = :user_id AND listing_id = :listing_id");
+                        $stmtFav->execute(['user_id' => $_SESSION['user']['id'], 'listing_id' => $row['id']]);
+                        $isFavorite = $stmtFav->fetchColumn() > 0;
+                        ?>
+
+                        <?php if (!$isFavorite): ?>
+                            <form method="post" action="add_favorite.php" style="display:inline;">
+                                <input type="hidden" name="listing_id" value="<?= $row['id'] ?>">
+                                <button type="submit">Ajouter aux favoris</button>
+                            </form>
+                        <?php else: ?>
+                            <form method="post" action="remove_favorite.php" style="display:inline;">
+                                <input type="hidden" name="listing_id" value="<?= $row['id'] ?>">
+                                <button type="submit">Retirer des favoris</button>
+                            </form>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                     
+                    <br>       
+                    <?php if (isset($_SESSION['user']) && 
+                    ($_SESSION['user']['id'] === $row['user_id'] || $_SESSION['user']['role'] === 'admin')): ?>
+                    <a href="edit.php?id=<?= $row['id'] ?>">Modifier </a>
+                    <br> 
+                    <a href="delete.php?id=<?= $row['id'] ?>"> Supprimer</a>
+                    <?php endif; ?>
                 </div>
             <?php endwhile ?> 
         </div>

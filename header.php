@@ -17,6 +17,7 @@ require_once 'bdd.php';
             <?php if (isset($_SESSION['user']['email'])): ?>
                 <span>Bienvenue, <?= htmlspecialchars($_SESSION['user']['email']) ?></span> |
                 <a href="add.php">Ajouter une annonce</a> |
+                <a href="favorites.php">Mes favoris</a> |
                 <a href="logout.php">Logout</a>
             <?php else: ?>
                 <a href="login.php">Login</a>
