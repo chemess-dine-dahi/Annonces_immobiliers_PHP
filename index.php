@@ -63,7 +63,7 @@ require_once 'bdd.php';
 
                     <br> 
                     <?php if (isset($_SESSION['user']) && 
-                    ($_SESSION['user']['id'] === $row['user_id'] || $_SESSION['user']['role'] === 'admin')): ?>
+                    (($_SESSION['user']['role'] === 'agent' && $_SESSION['user']['id'] === $annonce['user_id']) || $_SESSION['user']['role'] === 'admin')): ?>
                     <a href="edit.php?id=<?= $row['id'] ?>">Modifier</a>
                     <br> 
                     <a href="delete.php?id=<?= $row['id'] ?>">Supprimer</a>
@@ -121,7 +121,7 @@ require_once 'bdd.php';
                      
                     <br>       
                     <?php if (isset($_SESSION['user']) && 
-                    ($_SESSION['user']['id'] === $row['user_id'] || $_SESSION['user']['role'] === 'admin')): ?>
+                    (($_SESSION['user']['role'] === 'agent' && $_SESSION['user']['id'] === $annonce['user_id']) || $_SESSION['user']['role'] === 'admin')): ?>
                     <a href="edit.php?id=<?= $row['id'] ?>">Modifier </a>
                     <br> 
                     <a href="delete.php?id=<?= $row['id'] ?>"> Supprimer</a>

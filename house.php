@@ -90,7 +90,7 @@ $listings = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php endif; ?>
                     <br>       
                     <?php if (isset($_SESSION['user']) && 
-                    ($_SESSION['user']['id'] === $listing['user_id'] || $_SESSION['user']['role'] === 'admin')): ?>
+                    (($_SESSION['user']['role'] === 'agent' && $_SESSION['user']['id'] === $annonce['user_id']) || $_SESSION['user']['role'] === 'admin')): ?>
                         <a href="edit.php?id=<?= $listing['id'] ?>">Modifier </a>
                         <br> 
                         <a href="delete.php?id=<?= $listing['id'] ?>"> Supprimer</a>

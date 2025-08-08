@@ -1,6 +1,6 @@
 <?php
-require_once 'bdd.php';
 session_start();
+require_once 'bdd.php';
 
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
@@ -25,7 +25,7 @@ if (!$annonce) {
 }
 
 // Vérifie les droits
-if ($_SESSION['user']['role'] !== 'admin' && $_SESSION['user']['id'] !== $annonce['user_id']) {
+if ($_SESSION['user']['role'] !== 'admin' && !($_SESSION['user']['role'] === 'agent' && $_SESSION['user']['id'] === $annonce['user_id'])) {
     echo "Vous n'avez pas le droit de modifier cette annonce.";
     exit;
 }
@@ -60,7 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!-- Formulaire HTML -->
-<?php include 'header.php'; ?>
 <h2>Modifier l’annonce</h2>
 <form method="post">
     <label>Titre :</label>

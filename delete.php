@@ -18,7 +18,7 @@ if (!$annonce) {
     exit;
 }
 
-if ($_SESSION['user']['role'] !== 'admin' && $_SESSION['user']['id'] !== $annonce['user_id']) {
+if ($_SESSION['user']['role'] !== 'admin' && !($_SESSION['user']['role'] === 'agent' && $_SESSION['user']['id'] === $annonce['user_id'])) {
     echo "Suppression non autorisée.";
     exit;
 }
