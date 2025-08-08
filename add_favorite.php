@@ -15,5 +15,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['listing_id'])) {
     $stmt->execute(['user_id' => $userId, 'listing_id' => $listingId]);
 }
 
-header('Location: index.php');
+header('Location: ' . $_SERVER['HTTP_REFERER']);
 exit;

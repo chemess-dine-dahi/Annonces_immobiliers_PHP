@@ -36,9 +36,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = $_POST['price'];
     $city = $_POST['city'];
     $description = $_POST['description'];
+    $currentImage = $annonce['image_url'];
+    // Si une nouvelle image est uploadée
+    if (!empty($_FILES['image_url']['name'])) {
+        $uploadDir = 'upload/'; 
+        $fileName = basename($_FILES['image_url']['name']);
+        $dest = $uploadDir . time() . '_' . $fileName;
+        
+        if (move_uploaded_file($_FILES['image_url']['tmp_name'], $des)){
+            if (!empty($currentImage) && file_exists($currentImage)) {
+                unlink($currentImage);
+            }
+            $currentImage = $targetFilePath;
+        }
+    }
 
-    $stmt = $pdo->prepare("UPDATE listing SET title = ?, price = ?, city = ?, description = ? WHERE id = ?");
-    $stmt->execute([$title, $price, $city, $description, $id]);
+    $stmt = $pdo->prepare("UPDATE listing SET title = ?, price = ?, city = ?, description = ?, image_url = ? WHERE id = ?");
+    $stmt->execute([$title, $price, $city, $description, $currentImage, $id]);
 
     header('Location: index.php');
     exit;
@@ -46,10 +60,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!-- Formulaire HTML -->
+<?php include 'header.php'; ?>
 <h2>Modifier l’annonce</h2>
 <form method="post">
     <label>Titre :</label>
-    <input type="text" name="title" value="<?= htmlspecialchars($annonce['title']) ?>" required><br>
+    <input type="text" name="title" value="<?= $annonce['title'] ?>" required><br>
+
+
+    <img src="<?= $annonce['image_url']?>" alt="Image actuelle" style="width:150px;"><br>
+
+    <label>Changer l’image :</label>
+    <input type="file" name="image_url"><br>
 
     <label>Prix :</label>
     <input type="number" name="price" value="<?= $annonce['price'] ?>" required><br>

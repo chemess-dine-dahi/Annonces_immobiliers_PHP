@@ -4,14 +4,15 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 require_once 'bdd.php';
 ?>
-
-<header style="background: #eee; padding: 10px;">
-    <nav style="display: flex;">
+<link rel="stylesheet" href="styles.css">
+<header >
+    <nav >
         <div class="logo">Find My Dream Home</div>
         <div>
             <a href="index.php">Accueil</a> |
-            <a href="category.php?type=house">Maisons</a> |
-            <a href="category.php?type=apartment">Appartements</a>
+            <a href="house.php?page=1">Maisons</a> |
+            <a href="appartment.php?page=2">Appartements</a>|
+            <a href="search.php">Recherche</a></li>
         </div>
         <div>
             <?php if (isset($_SESSION['user']['email'])): ?>

@@ -21,9 +21,11 @@ require_once 'bdd.php';
                     JOIN propertyType pt ON l.property_type_id = pt.id
                     JOIN transactionType tt ON l.transaction_type_id = tt.id
                     WHERE pt.name = :type
+                    LIMIT :limit
                     ";
                 $stmt = $pdo->prepare($sqlMaisons);
                 $stmt->bindValue(':type', 'house', PDO::PARAM_STR);
+                $stmt->bindValue(':limit', 3, PDO::PARAM_INT);
                 $stmt->execute();
              ?>
 
@@ -77,9 +79,11 @@ require_once 'bdd.php';
                     JOIN propertyType pt ON l.property_type_id = pt.id
                     JOIN transactionType tt ON l.transaction_type_id = tt.id
                     WHERE pt.name = :type
+                    LIMIT :limit
                     ";
                 $stmt = $pdo->prepare($sqlAppart);
                 $stmt->bindValue(':type', 'appartment', PDO::PARAM_STR);
+                $stmt->bindValue(':limit', 3, PDO::PARAM_INT);
                 $stmt->execute();
              ?>
 

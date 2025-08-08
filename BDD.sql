@@ -81,7 +81,7 @@ insert into user(email,password, created_at, updated_at,role)
 values('agent1@gmail.com', 'Agent?1234', now(), now(), 'agent');
 insert into user(email,password, created_at, updated_at,role) 
 values('admin1@gmail.com', 'Admin?1234', now(), now(), 'admin');
-
+select *from user;
 CREATE TABLE favorite (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -90,3 +90,5 @@ CREATE TABLE favorite (
     FOREIGN KEY (user_id) REFERENCES user(id),
     FOREIGN KEY (listing_id) REFERENCES listing(id)
 );
+
+select * from listing;

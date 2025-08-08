@@ -26,6 +26,7 @@ $favorites = $stmt->fetchAll();
     <title>Mes favoris</title>
 </head>
 <body>
+    <?php include 'header.php'; ?>
     <h1>Mes annonces favorites</h1>
     <?php if (empty($favorites)): ?>
         <p>Vous n'avez aucune annonce en favoris.</p>
